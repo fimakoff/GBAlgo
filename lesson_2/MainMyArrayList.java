@@ -1,9 +1,11 @@
 package lesson_2;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Random;
 
 public class MainMyArrayList {
-    private static final int MAX_ITEMS = 10000;  //712376316
+    private static final int MAX_ITEMS = 5000;  //712376316
     private static final int MIN_VALUES = 0;
     private static final int MAX_VALUES = Integer.MAX_VALUE;
     private static final int MAX_NUMS_EXPER = 10;
@@ -26,13 +28,27 @@ public class MainMyArrayList {
             int rn = rand.nextInt(diff);
             nums.add(rn);
         }
+
         System.out.println("Размер списка после добавления элементов: " + nums.size() + " элементов\n");
+
+        MyArrayList<Integer> copy1 = new MyArrayList<>();
+        for (int i = 0; i < nums.size(); i++) {
+            copy1.add(nums.get(i));
+        }
+        MyArrayList<Integer> copy2 = new MyArrayList<>();
+        for (int i = 0; i < nums.size(); i++) {
+            copy2.add(nums.get(i));
+        }
+        MyArrayList<Integer> copy3 = new MyArrayList<>();
+        for (int i = 0; i < nums.size(); i++) {
+            copy3.add(nums.get(i));
+        }
         // Сортировка вставками
-        mainInsertionSort(nums);
+        mainInsertionSort(copy1);
         // Сортировка выбором
-        mainSelectionSort(nums);
+        mainSelectionSort(copy2);
         // Пузырьковая сортировка
-        mainBubbleSort(nums);
+        mainBubbleSort(copy3);
         // Вывод результатов тестирования в консоль
         printer(timeConsumedMillisIS, timeConsumedMillisSS, timeConsumedMillisBS);
 
