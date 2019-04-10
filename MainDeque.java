@@ -1,5 +1,3 @@
-package lesson_3;
-
 public class MainDeque {
 
     private static final int MAX_ITEMS = 15;

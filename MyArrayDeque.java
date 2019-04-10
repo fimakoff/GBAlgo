@@ -1,32 +1,32 @@
-package lesson_3;
 
 public class MyArrayDeque<Item> {
     private Object[] deque = new Object[1];
     private int size = 0;
-    private int start = 0;
-    private int end = 0;
-
+    private int left = 0;
+    private int right = 0;
+    private Item next = null;
     private void resize(int capacity) {
         Object[] tmp = new Object[capacity];
         for (int i = 0; i < size; i++) {
-            tmp[i] = deque[(start+i) % deque.length];
+            tmp[i] = deque[(left +i) % deque.length];
         }
         deque = tmp;
-        start = size;
-        end = 0;
+        //left = 0;
+        right = size;
     }
 
     public void insertLeft(Item item){
-
         if (size == deque.length) {
             resize(deque.length * 2);
         }
+        deque[left] = item;
+        for (int i = left; i < deque.length-1; i++) {
+//            next = (Item) deque[i+1];
+            deque[i+1]=deque[i];
+//            deque[i]=next;
+        }
 
-        deque[start] = item;
         size++;
-        start--;
-        //start=size;
-        start %= deque.length;
     }
 
     public String toString() {
