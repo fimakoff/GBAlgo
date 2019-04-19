@@ -2,41 +2,45 @@ package lesson_5;
 
 public class MainPow {
     public static void main(String[] args) {
-        System.out.println(powRec(6,4));
-        System.out.println(fastPow(6,5));
-        System.out.println(powFor(6,5));
+        int number = 6;
+        int step = 9;
+        System.out.println(powRec(number, step));
+        System.out.println(powFor(number,step));
+        System.out.println(fastPowFor(number,step));
+        System.out.println(fastPowRec(number, step));
+
     }
 
-    private static long fastPow(int num, int step) {
-        long insight = num;
-        if (step%2==0) {
-            for (int i = 0; i <= step / 2; i++) {
-                insight *= num;
-            }
+    private static long fastPowRec(long num, int step) {
+        if (step == 0) return 1;
+        if (step % 2 == 0) {
+            long insight = fastPowRec(num, step / 2);
+            return insight * insight;
+        } else {
+            return fastPowRec(num, (step - 1)) * num;
         }
-        else{
+    }
 
-            for (int i = 0; i <= (step-1)/2; i++) {
-                insight*=num;
-            }
-            insight*=num;
-
+    private static long fastPowFor(int num, int step) {
+        long insight = 1;
+        while(step!=0){
+            if (step%2 == 1) insight *=num;
+            num*=num;
+            step = step >>1;
         }
         return insight;
     }
 
-    public static long powRec(long num, int step){
-        if (step==1) return num;
-        num*= powRec(num,step-1);
+    public static long powRec(long num, int step) {
+        if (step == 1) return num;
+        num *= powRec(num, step - 1);
         return num;
     }
 
-    public static int powFor(int num, int step){
+    public static int powFor(int num, int step) {
         int temp = 1;
         for (int i = 0; i < step; i++) temp *= num;
         return temp;
     }
-
-
 }
 
